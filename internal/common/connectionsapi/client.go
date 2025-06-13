@@ -36,12 +36,6 @@ func NewClient(authToken string, rawURL string, client *http.Client, userAgent s
 
 	if client == nil {
 		retryClient := retryablehttp.NewClient()
-		retryClient.HTTPClient = &http.Client{
-                  Timeout: defaultTimeout,
-                  Transport: &http.Transport{
-                     Proxy: http.ProxyFromEnvironment,
-                  },
-                }
 		retryClient.RetryMax = defaultRetries
 		client = retryClient.StandardClient()
 		client.Timeout = defaultTimeout
